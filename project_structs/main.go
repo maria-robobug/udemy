@@ -3,25 +3,34 @@ package main
 import "fmt"
 
 type contactInfo struct {
-	email   string
-	zipCode int
+	email    string
+	postCode string
 }
 
 type person struct {
 	firstName string
 	lastName  string
-	contact   contactInfo
+	contactInfo
 }
 
 func main() {
 	jim := person{
 		firstName: "Jim",
 		lastName:  "Carrey",
-		contact: contactInfo{
-			email:   "jim@blah.com",
-			zipCode: 94000,
+		contactInfo: contactInfo{
+			email:    "jim@blah.com",
+			postCode: "ST7 8KL",
 		},
 	}
 
-	fmt.Printf("%+v", jim)
+	jim.updateName("Jimmy")
+	jim.print()
+}
+
+func (p person) print() {
+	fmt.Printf("%+v", p)
+}
+
+func (p *person) updateName(newFirstName string) {
+	(*p).firstName = newFirstName
 }
